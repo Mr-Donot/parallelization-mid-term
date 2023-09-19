@@ -2,6 +2,7 @@ from PIL import Image
 from Circle import *
 import math
 from random import randint
+from tqdm import tqdm
 
 def isHexa(hexa):
     if len(hexa)!= 6 and len(hexa)!= 7:
@@ -94,7 +95,9 @@ def addMultipleCircle(img, nbCircle):
         circles.append(circle)
 
     sorted_circles = sorted(circles, key=lambda circle: circle.z)
-    for c in sorted_circles :
-        addCircleInImg(img, c, 2)
-
+    progress_bar = tqdm(total=len(sorted_circles), desc="Processing")
+    for c in range(len(sorted_circles)) :
+        progress_bar.update(1)
+        addCircleInImg(img, sorted_circles[c], 2)
+    progress_bar.close()
     return img
