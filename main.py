@@ -1,22 +1,30 @@
 from utils import *
-
-largeur = 500
-hauteur = 500
-img = createUniformImageWithHexa("#FFFFFF", largeur, hauteur)
-
-nbCircle = 100
-modPrint = 50
-
-img = addMultipleCircle(img, nbCircle)
+import time
 
 
-img.show()
-#filterNegative(img).show()
+if __name__ == '__main__':
 
-#idee de parallelisation : 
-    #- 1
-    #- trier les cercles par z croissant
-    #- pour chaque "étage" (z), dessinez les cercles en para, puis go to next etage
+    largeur = 192
+    hauteur = 108
+    nbCircle = 50
+    nbLayer = 5
+    initHexa = "#FFFFFF"
+    z=2
 
-    #- 2
-    #-paralléliser le changement de couleurs de chaque pixels du cercle, mais un cercle par un
+    t0 = time.time()
+
+    img = multipleLayersParallel(largeur, hauteur, nbCircle, nbLayer, z, initHexa)
+    t1 = time.time()
+
+    
+
+    i2 = multipleLayers(largeur, hauteur, nbCircle, nbLayer, initHexa)
+    t2 = time.time()
+
+    print(f"temps para : {t1-t0}")
+    print(f"temps non-para : {t2-t1}")
+
+    img.show()
+    i2.show()    
+
+

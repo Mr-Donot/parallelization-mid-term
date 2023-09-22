@@ -10,4 +10,7 @@ class Circle :
         self.radius = radius
         self.color = color
 
+    def __str__(self) -> str:
+        return f"(x,y,z) : {self.x},{self.y},{self.z} | radius : {self.radius} | color : {self.color}"
+
     
